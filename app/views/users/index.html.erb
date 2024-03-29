@@ -1,0 +1,20 @@
+
+<table class="table table-bordered">
+  <thead><th>Номер</th><th>Никнейм</th><th>Email</th><th>Роль</th><th>Изменить роль</th></thead>
+  <tbody>
+  <% @i=0 %>
+    <% @users.each do |user| %>
+        <tr>
+        <td><%= @i %></td>
+        <td><%= link_to user.firstname, user_posts_path( user ) %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <% if user.admin? %>
+        <td></td>
+        <% else %>
+        <td><%= link_to "Change roles", change_roles_path(user)  if user_signed_in? && current_user.admin? %></td>
+        <% end %>
+        <% @i=@i+1 %>
+    <% end %>
+  </tbody>
+</table>

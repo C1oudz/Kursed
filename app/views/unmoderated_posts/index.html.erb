@@ -1,0 +1,26 @@
+<h1>Все посты на модерации</h1>
+<%= form_tag(posts_path, method: "get", class: "mb-4") do %>
+    <div class="input-group">
+      <%= text_field_tag :search, params[:search], placeholder: "Поиск", class: "form-control" %>
+      <div class="input-group-append">
+        <%= submit_tag "Искать", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+  
+  <% if @posts.present? %>
+    <% @posts.each do |post| %>
+      <div class="alert alert-light">
+        <h3> Название: <%= post.title %></h2>
+        <h3>Автор: <%= link_to post.user.firstname, user_posts_path( post.user )%></h2>
+        <h4>Категория: <%= link_to post.category.name, category_path(post.category)%></h4>
+        <p><%= post.body %></p>
+        <p>Дата: <%= post.created_at.to_date.strftime("%d.%m.%Y") %></p>
+        <%= link_to "Модерировать", moderatepost_path(id: post.id), class: 'btn btn-success' %>
+      </div>
+    <% end %>
+  
+  
+  <% else %>
+    <p>Ничего не найдено.</p>
+  <% end %>

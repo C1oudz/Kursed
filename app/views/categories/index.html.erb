@@ -1,0 +1,8 @@
+<h1 align="center">Категории</h1>
+<br>
+<% @categories.each do |cat| %>
+    <h5><%= link_to cat.name, category_path(cat)%></h5>
+    <br>
+<% end %>
+<%= link_to "Добавить категорию", newcat_path, class: "btn btn-primary" if user_signed_in? && (current_user.moderator? || current_user.admin?) %>
+<br>

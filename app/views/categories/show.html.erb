@@ -1,0 +1,13 @@
+<h3>Название: <%= @categories.name %></h5>
+</p>
+<%= link_to "Редактировать", edit_category_path(@categories), :class => 'btn btn-warning' if user_signed_in? && (current_user.moderator? || current_user.admin?) %>
+<% @i=1 %>
+<br><br><br><br>
+<h4>Все посты в данной категории:</h4>
+<br>
+<% @post.each do |post| %>
+    <h5><%= link_to "Статья №"+@i.to_s+" "+post.title.to_s, post_path(post)%> <% @i=@i+1 %> </h5>
+    <h6>Категория: <%= link_to post.category.name, category_path(post.category)%></h6>
+    <%= post.body %> 
+    <br><br><br>
+<% end %>

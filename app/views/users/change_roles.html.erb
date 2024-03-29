@@ -1,0 +1,5 @@
+<%= form_for(@user, url: user_path(@user), html: { method: :put }) do |f| %>
+    <%= f.label :roles %>
+    <%= f.select :role, options_for_select(['moderator', 'user'], @user.role) %>
+    <%= f.submit "Save" %>
+<% end %>

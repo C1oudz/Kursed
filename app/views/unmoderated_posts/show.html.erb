@@ -1,0 +1,9 @@
+<h1><%= @post.title %></h1>
+<h1><%= @post.category.name %></h1>
+<% if @post.user %>
+<h2>Автор: <%= link_to @post.user.firstname, user_posts_path( @post.user )%></h2>
+<% end %>
+<p><%= @post.body %></p>
+<%= link_to "Подтвердить", confirmpost_path(id: @post.id), method: :patch, :class => 'btn btn-success' if current_user.moderator? || current_user.admin?%>
+<%= link_to "Отклонить", rejectpost_path(id: @post.id), method: :patch, :class => 'btn btn-danger' if current_user.moderator? || current_user.admin? || user_signed_in? && @post.user == current_user %>
+<hr>

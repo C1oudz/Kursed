@@ -1,0 +1,2 @@
+module UnmoderatedPostsHelper
+end

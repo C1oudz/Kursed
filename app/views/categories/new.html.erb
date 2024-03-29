@@ -1,0 +1,19 @@
+<h1 align="center">Добавление новой категории</h1>
+<br><br>
+<%= form_for :category, url: categories_path do |f| %>
+
+        <% if @category.errors.any? %>
+            <% @category.errors.full_messages.each do |msg| %>
+                <div class="alert alert-danger"> <%= msg %></div>
+                <% end %>
+        <% end %>
+
+    <p>
+        Название категории<br>
+        <%= f.text_field(:name, {:class => 'form-control'}) %>
+    </p>
+    <p>
+        <%= f.submit "Создать категорию", class: "btn btn-primary" if user_signed_in? && (current_user.moderator? || current_user.admin?) %>
+    </p>
+    
+<% end %>

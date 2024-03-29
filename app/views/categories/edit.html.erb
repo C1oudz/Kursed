@@ -1,0 +1,17 @@
+<h2 align="center">Редактирование категории</h2>
+<br><br>
+<%= form_for :category, url: category_path(@categories), method: :patch do |f| %>
+    <% if @categories.errors.any? %>
+        <% @categories.errors.full_messages.each do |msg| %>
+            <div class="allert allert-danger"> <%= msg %></div>
+        <% end %>
+    <% end %>
+    <p>
+        Название категории<br>
+        <%= f.text_field(:name, {:class => 'form-control'}) %>
+    </p>
+    <p>
+        <%= f.submit "Редактировать категорию", class: "btn btn-primary" if user_signed_in? && (current_user.moderator? || current_user.admin?) %>
+    </p>
+    
+<% end %>

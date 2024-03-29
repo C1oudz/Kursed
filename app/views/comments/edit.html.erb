@@ -1,0 +1,12 @@
+<h2>Редактирование комментария</h2>
+<%= form_for([@post, @comment]) do |f| %>
+
+  <p style="margin-bottom: 15px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+    Текст комментария<br>
+    <%= f.text_area :body, style: "width: 100%; box-sizing: border-box; padding: 5px;", value: @comment.body %>
+  </p>
+
+  <p>
+    <%= f.submit("Сохранить изменения", class: 'btn btn-primary') %>
+  </p>
+<% end %>

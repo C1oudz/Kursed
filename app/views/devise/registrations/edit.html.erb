@@ -1,0 +1,58 @@
+<h2>Редактировать</h2>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= link_to "Посмотреть все свои статьи", my_path%>
+  <br />
+  <div class="field">
+  <% if current_user.chat_id.present? %>
+  <p>Ваш аккаунт уже привязан к Telegram.</p>
+  <%= link_to "Отвязать аккаунт от Telegram", resetchatid_path(current_user), method: :patch, data: { confirm: 'Вы уверены?' }, class: "btn btn-danger" %>
+  <% else %>
+  <%= link_to 'Привязать аккаунт к Telegram', new_verification_code_path, class: 'btn btn-primary' %>
+  <% end %>
+  </div>
+  <br />
+  <div class="field">
+    <%= f.label :Никнейм %><br />
+    <%= f.text_field :firstname, autofocus: true, autocomplete: "firstname" %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password %> <i>Оставьте пусты, если не хотите менять</i><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password %> <i></i><br />
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <br />
+  <div class="actions">
+    <%= f.submit "Обновить" %>
+  </div>
+<% end %>
+
+<br />
+<div>Что-то не нравится? <%= button_to "Удалить аккаунт", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+
+<%= link_to "Назад", :back %><br />

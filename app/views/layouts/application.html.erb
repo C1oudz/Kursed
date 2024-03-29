@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vvv</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css' %>
+  </head>
+
+  
+
+  <body>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+       <h5 class="my-0 mr-md-auto font-weight-bold">extranews</h5>
+       <nav class="my-2 my-md-0 mr-md-3 ml-auto text-right">
+          <span class="p-2 text-dark"><%= link_to "Главная страница", home_path %></span>
+          <span class="p-2 text-dark"><%= link_to "Правила", about_path %></span>
+       </nav>
+       <span class="p-2 text-dark"><%= link_to "Добавление статьи", new_post_path if user_signed_in? %></span>
+       <span class="nav-link px-2"><%= link_to "Категории", cat_path%></span>
+        <%if user_signed_in?%>
+       <span class="nav-link px-2"><%= link_to "Все пользователи", allusers_path if current_user.admin? %></span>
+       <span class="nav-link px-2"><%= link_to "На модерации", unmoderatedposts_path if current_user.admin? || current_user.moderator? %></span>
+       <span class="nav-link px-2"><%= link_to "Отклоненные", unmoderatedposts_path if current_user.admin? || current_user.moderator? %></span>
+       <% end %> 
+       <%if user_signed_in? %> 
+         <span class="p-2 text-dark"><%= link_to current_user.firstname, edit_user_registration_path %>
+         <span class="p-2 text-dark"><%= link_to "Выйти", destroy_user_session_path, method: :delete %>
+       <% else%>
+         <span class="p-2 text-dark"><%= link_to "Войти", new_user_session_path %>
+         <span class="p-2 text-dark"><%= link_to "Зарегистирироваться", new_user_registration_path %>
+       <% end %>
+
+
+    </div>
+    <p class="flash notice"><%= flash[:notice] %></p>
+    <p class="flash alert"><%= flash[:alert] %></p>
+    <div class="container">
+    <%= yield %>
+    </div>
+
+
+
+  </body>
+</html>
+  

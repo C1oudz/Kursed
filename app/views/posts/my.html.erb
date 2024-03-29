@@ -1,0 +1,18 @@
+<% @posts.each do |post| %>
+    <div class="alert alert-light">
+        <h1> Все посты пользователя <%= post.user.firstname%></h1>
+        <h2> Назван ие: <%= post.title %></h2>
+        <h2>Автор: <%= link_to post.user.firstname, my_path%></h2>
+        <h4>Категория: <%= link_to post.category.name, category_path(post.category)%></h4>
+        <p><%= post.body %></p>
+        <p>Дата: <%= post.created_at.to_date.strftime("%d.%m.%Y") %></p>
+        <% if post.status == 0 %>
+            <p style="color: darkblue;">Статус: На модерации</p>
+        <% elsif post.status == 1 %>
+            <p style="color: green;">Статус: Подтвержден</p>
+        <% elsif post.status == 2 %>
+            <p style="color: red;">Статус: Отклонен</p>
+        <% end %>
+        <%= link_to "Читать далее", post_path(post), class: 'btn btn-default text-primary' %>
+      </div>
+  <% end %>

@@ -1,0 +1,14 @@
+<h1>Введите код для привязки к Telegram</h1>
+
+<%= form_with model: @verification_code, url: verification_codes_path, method: :post do |form| %>
+  <% if flash[:alert] %>
+    <div class="alert alert-danger"><%= flash[:alert] %></div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :code, 'Введите код' %>
+    <%= form.text_field :code, class: 'form-control' %>
+  </div>
+
+  <%= form.submit 'Привязать', class: 'btn btn-primary' %>
+<% end %>

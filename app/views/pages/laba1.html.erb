@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liquipedia</title>
+</head>
+<body>
+    <form action="" method "post">
+    <h1>Задание 1</h1>
+    <p>1. Имя <br> <input type="text" name="firstname" required pattern="^[A-Za-zА-Яа-яЁё]+$" ></p>
+    <p>2. Фамилия <br> <input type="text" name="surname" required minlength="5" ></p>
+    <p>3. Возраст <br><input type="text" name="age" required min=1 pattern="[ 0-9]+$" ></p>
+    <p>4. Пол (Мужской/Женский) <br></p>
+    
+    <input type="radio" name="пол" value="муж" checked/>
+    <label for="муж">Мужской</label>
+    
+    <input type="radio" name="пол" value="жен"/>
+    <label for="жен">Женский</label>
+    
+    <br>
+    <input type="submit" value ="Отправить" class="btn btn-primary"/>
+    </form>
+</body> 
+</html>
